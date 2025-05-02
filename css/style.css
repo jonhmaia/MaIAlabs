@@ -691,3 +691,191 @@ section {
 
 /* Responsive adjustments for footer needed later */
 
+
+
+/* === RESPONSIVE DESIGN === */
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+    :root {
+        --header-height: 70px;
+    }
+
+    .container {
+        max-width: 960px;
+    }
+
+    h1 {
+        font-size: 2.8rem;
+    }
+
+    h2 {
+        font-size: 2.2rem;
+    }
+
+    .navbar {
+        position: relative; /* Needed for absolute positioning of mobile menu */
+    }
+
+    .menu-toggle {
+        display: block; /* Show hamburger */
+        background: none;
+        border: none;
+        color: var(--primary-text-color);
+        font-size: 1.8rem;
+        cursor: pointer;
+        z-index: 1001; /* Above nav links */
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%; /* Position below header */
+        left: 0;
+        width: 100%;
+        background-color: var(--card-bg-color); /* Match card background */
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        gap: 1rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Smooth transition */
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-links.active {
+        max-height: 300px; /* Adjust as needed */
+        padding: 1rem 0;
+    }
+
+    .navbar .btn-primary {
+        display: none; /* Hide button in navbar on tablet, maybe show in menu */
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        min-height: auto; /* Adjust height */
+        padding-top: calc(var(--header-height) + 30px); /* More space below header */
+        padding-bottom: 40px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .hero-content p {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-clients {
+        justify-content: center;
+    }
+
+    .hero-visual {
+        margin-top: 2rem;
+        min-height: 250px;
+    }
+
+    .technology {
+        flex-direction: column;
+    }
+
+    .technology-content h2 {
+        text-align: center;
+    }
+
+    .contact-wrapper {
+        flex-direction: column;
+        padding: 2rem;
+    }
+
+    .contact-info h2 {
+        text-align: center;
+    }
+
+    .footer-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        text-align: center;
+    }
+
+    .footer-about p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .footer-social .social-icons {
+        justify-content: center;
+    }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .service-cards {
+        grid-template-columns: 1fr; /* Stack cards */
+    }
+
+    .logos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-about,
+    .footer-links,
+    .footer-legal,
+    .footer-social {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    body {
+        font-size: 15px;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 80%;
+        padding: 0.9rem 1rem;
+    }
+
+    .contact-wrapper {
+        padding: 1.5rem;
+    }
+
+    .logos-grid {
+        grid-template-columns: 1fr; /* Stack logos */
+    }
+}
+

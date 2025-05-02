@@ -1,134 +1,92 @@
 // === Smooth Scrolling ===
-document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+document.querySelectorAll("a[href^=\"#\"]").forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
         e.preventDefault();
-
-        const targetId = this.getAttribute('href');
+        const targetId = this.getAttribute("href");
         const targetElement = document.querySelector(targetId);
-
         if (targetElement) {
-            const headerOffset = document.querySelector('.header')?.offsetHeight || 80; // Get header height or default
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth"
-            });
-
-            // Optional: Add active class to clicked link and remove from others
-            document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
-            this.classList.add('active');
+            targetElement.scrollIntoView({ behavior: "smooth" });
         }
     });
 });
 
-// === Add active class on scroll === (Optional but good UX)
-const sections = document.querySelectorAll('section[id]');
-
-function navHighlighter() {
-  let scrollY = window.pageYOffset;
-  const headerHeight = document.querySelector('.header')?.offsetHeight || 80;
-
-  sections.forEach(current => {
-    const sectionHeight = current.offsetHeight;
-    const sectionTop = current.offsetTop - headerHeight - 50; // Adjust offset as needed
-    let sectionId = current.getAttribute('id');
-
-    /* If our current scroll position enters the space where current section on screen is, add .active class to corresponding navigation link, else remove it */
-    if (
-      scrollY > sectionTop &&
-      scrollY <= sectionTop + sectionHeight
-    ){
-      document.querySelector('.nav-links a[href*=' + sectionId + ']').classList.add("active");
+// === Header Scroll Effect ===
+const header = document.querySelector(".header");
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+        header.classList.add("scrolled");
     } else {
-      document.querySelector('.nav-links a[href*=' + sectionId + ']').classList.remove("active");
+        header.classList.remove("scrolled");
     }
-  });
-}
+});
 
-window.addEventListener('scroll', navHighlighter);
+// === Active Nav Link on Scroll ===
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".nav-links a");
 
-// === Header background change on scroll === (Optional)
-const header = document.querySelector('.header');
-if (header) {
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) { // Add background after scrolling 50px
-            header.classList.add('scrolled'); // Need to define .scrolled class in CSS
-        } else {
-            header.classList.remove('scrolled');
+window.addEventListener("scroll", () => {
+    let current = "";
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        // Adjust offset as needed, e.g., based on header height
+        if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+            current = section.getAttribute("id");
         }
     });
-    // Add the corresponding CSS:
-    // .header.scrolled { background-color: rgba(10, 15, 26, 0.9); backdrop-filter: blur(5px); }
-}
 
-// === Mobile Menu Toggle === (Placeholder - requires HTML button and CSS)
-// const menuToggle = document.querySelector('.menu-toggle');
-// const navLinks = document.querySelector('.nav-links');
-// if (menuToggle && navLinks) {
-//     menuToggle.addEventListener('click', () => {
-//         navLinks.classList.toggle('active');
-//         menuToggle.classList.toggle('active'); // For styling the toggle itself (e.g., X icon)
-//     });
-// }
+    navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href").includes(current)) {
+            link.classList.add("active");
+        }
+    });
+    // Ensure home is active if scrolled to top
+    if (window.pageYOffset < sections[0].offsetTop - header.clientHeight) {
+        navLinks.forEach(link => link.classList.remove("active"));
+        document.querySelector(".nav-links a[href=\"#home\"]").classList.add("active");
+    }
+});
 
-const contactForm = document.querySelector('.contact-form form');
+// === Form Validation === (Basic Example)
+const contactForm = document.querySelector(".contact-form form");
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        // Basic validation example - add more robust checks as needed
-        const name = this.querySelector('#name');
-        const email = this.querySelector('#email');
-        const message = this.querySelector('#message');
-        let isValid = true;
-
-        if (name.value.trim() === '') {
-            alert('Por favor, insira seu nome.');
-            name.focus();
-            isValid = false;
-            e.preventDefault();
-            return;
-        }
-
-        // Very basic email check
-        if (email.value.trim() === '' || !email.value.includes('@')) {
-            alert('Por favor, insira um email válido.');
-            email.focus();
-            isValid = false;
-            e.preventDefault();
-            return;
-        }
-
-        if (message.value.trim() === '') {
-            alert('Por favor, escreva sua mensagem.');
-            message.focus();
-            isValid = false;
-            e.preventDefault();
-            return;
-        }
-
-        if (isValid) {
-            // Optionally show a success message or disable button after submission
-            alert('Mensagem enviada (simulação)!'); // Changed alert message
-            // Note: This form doesn't actually send data anywhere without backend code or a service.
-            e.preventDefault(); // Prevent actual submission for this example
-        }
+    contactForm.addEventListener("submit", (e) => {
+        // Basic validation can be added here
+        // e.preventDefault(); // Uncomment to prevent actual submission for testing
+        console.log("Form submitted (or would be)");
+        // Add more robust validation logic if needed
     });
 }
 
-// === Particle Animation (Step 6) ===
-// Will be added later using a library like particles.js or tsParticles
+// === Mobile Menu Toggle (Added for Responsiveness) ===
+const menuToggle = document.querySelector(".menu-toggle");
+const navMenu = document.querySelector(".nav-links");
 
+if (menuToggle && navMenu) {
+    menuToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+    });
+
+    // Close menu when a link is clicked (optional)
+    navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            if (navMenu.classList.contains("active")) {
+                navMenu.classList.remove("active");
+            }
+        });
+    });
+}
 
 // === Particle Animation (Step 6) ===
 // Using particles.js library
 
 // Check if particlesJS is loaded
-if (typeof particlesJS !== 'undefined') {
-    particlesJS('particles-js', {
+if (typeof particlesJS !== "undefined") {
+    particlesJS("particles-js", {
         "particles": {
             "number": {
-                "value": 50, // Adjusted number of particles
+                "value": 40, // Adjusted number of particles
                 "density": {
                     "enable": true,
                     "value_area": 800
