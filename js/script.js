@@ -59,6 +59,8 @@ if (contactForm) {
     });
 }
 
+  
+ 
 // === Mobile Menu Toggle (Added for Responsiveness) ===
 const menuToggle = document.querySelector(".menu-toggle");
 const navMenu = document.querySelector(".nav-links");
@@ -192,3 +194,39 @@ if (typeof particlesJS !== "undefined") {
     console.error("particles.js not loaded");
 }
 
+function showToast(message, type = "success") {
+    const toastContainer = document.getElementById("toast-container");
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    toast.innerText = message;
+  
+    toastContainer.appendChild(toast);
+  
+    setTimeout(() => {
+      toast.remove();
+    }, 6000); // 4 segundos
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const btnTecnologias = document.getElementById("btn-tecnologias");
+    const modal = document.getElementById("modal-tecnologias");
+    const closeBtn = modal?.querySelector(".close-button");
+  
+    if (btnTecnologias && modal && closeBtn) {
+      btnTecnologias.addEventListener("click", () => {
+        modal.classList.add("active");
+      });
+  
+      closeBtn.addEventListener("click", () => {
+        modal.classList.remove("active");
+      });
+  
+      window.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.classList.remove("active");
+        }
+      });
+    }
+  });
+  
+  

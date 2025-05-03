@@ -8,6 +8,7 @@
     <!-- Adicionar links para fontes, ícones, etc. aqui se necessário -->
     <!-- Exemplo: <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"> -->
 </head>
+
 <body>
     <!-- Container for particles -->
     <div id="particles-js"></div>
@@ -16,13 +17,12 @@
         <nav class="navbar container">
             <a href="#" class="logo">MaIA <span>Labs</span></a>
             <ul class="nav-links">
-                <li><a href="#home" class="active">Home</a></li> <!-- Start with Home active -->
+                <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#services">Serviços</a></li>
-                <li><a href="#technology">Tecnologia</a></li>
                 <li><a href="#contact">Contato</a></li>
             </ul>
-            <button class="btn btn-primary">Iniciar Projeto</button>
-            <!-- Adicionar botão de menu hamburguer para mobile -->
+            <a href="#contact" class="btn btn-primary">Iniciar Projeto</a>
+            
             <button class="menu-toggle">&#9776;</button>
         </nav>
     </header>
@@ -33,16 +33,25 @@
                 <h1>Soluções inteligentes <br>com <span>Inteligência Artificial</span></h1>
                 <p>Transforme seu negócio com soluções avançadas de IA. Na MaIA Labs, combinamos tecnologia de ponta com expertise humana para criar resultados excepcionais.</p>
                 <div class="hero-buttons">
-                    <button class="btn btn-primary">Iniciar Projeto</button>
-                    <button class="btn btn-secondary">Conhecer Tecnologias</button>
+                    <a href="#contact" class="btn btn-primary">Iniciar Projeto</a>
+                    <button id="btn-tecnologias" class="btn btn-secondary">Conhecer Tecnologias</button>
                 </div>
                 <div class="hero-clients">
-                    <!-- Adicionar ícones/imagens dos clientes aqui -->
+                    <div class="social-icons">
+                        <a href="#"><img src="assets/images/instagram.png" alt="instagram"></a>
+                        </a>
+                        <a href="#"><img src="assets/images/X.png" alt="instagram"></a>
+                        </a>
+                        <a href="#"><img src="assets/images/email.png" alt="instagram"></a>
+                        </a>
+                    
+                    </div>
                     <span>+200 clientes confiam em nossas soluções de IA</span>
                 </div>
             </div>
             <div class="hero-visual">
-                <!-- Elementos visuais/animação serão adicionados aqui (possivelmente com CSS/JS) -->
+               <img width="256" height="256"   src="assets/images/artificial-intelligence (2).png" alt="brain-3--v1"/></div>
+                  
             </div>
         </section>
 
@@ -51,22 +60,22 @@
             <p class="section-subtitle">Soluções personalizadas de IA para impulsionar sua empresa rumo ao futuro digital</p>
             <div class="service-cards">
                 <div class="card">
-                    <div class="card-icon"><!-- Ícone ML --></div>
+                    <div class="card-icon"><img width="64" height="64"   src="assets/images/cerébro.png" alt="brain-3--v1"/></div>
                     <h3>Machine Learning</h3>
                     <p>Modelos personalizados para reconhecimento de padrões e previsões precisas baseadas em seus dados.</p>
                 </div>
                 <div class="card">
-                    <div class="card-icon"><!-- Ícone NLP --></div>
+                    <div class="card-icon"><img width="64" height="64"   src="assets/images/cerébro.png" alt="brain-3--v1"/></div>
                     <h3>Processamento de Linguagem</h3>
                     <p>Análise de texto, chatbots inteligentes e sistemas de recomendação baseados em conteúdo.</p>
                 </div>
                 <div class="card">
-                    <div class="card-icon"><!-- Ícone CV --></div>
+                    <div class="card-icon"><img width="64" height="64"   src="assets/images/cerébro.png" alt="brain-3--v1"/></div>
                     <h3>Visão Computacional</h3>
                     <p>Reconhecimento de imagens, detecção de objetos e análise de vídeo com precisão.</p>
                 </div>
                 <div class="card">
-                    <div class="card-icon"><!-- Ícone Automação --></div>
+                    <div class="card-icon"><img width="64" height="64"   src="assets/images/cerébro.png" alt="brain-3--v1"/></div>
                     <h3>Automação Inteligente</h3>
                     <p>Automatize processos complexos com decisões baseadas em IA para maior eficiência.</p>
                 </div>
@@ -84,32 +93,27 @@
                     <p>Estamos prontos para ajudar a transformar sua visão em realidade. Entre em contato e descubra como a IA pode impulsionar o seu negócio.</p>
                     <ul>
                         <li>
-                            <div class="info-icon"><!-- Ícone Email --></div>
+                            <div class="info-icon"><img width="26" height="26" src="assets/images/email.png" alt="email"/></div>
                             <div>
                                 <strong>Email</strong>
-                                <p>contato@maialabs.com.br</p> <!-- Substituir pelo email real se disponível -->
+                                <p>contato@maialabs.com.br</p> 
                             </div>
                         </li>
                         <li>
-                            <div class="info-icon"><!-- Ícone Telefone --></div>
+                            <div class="info-icon"><img width="26" height="26" src="assets/images/telefone.png" alt="telefone"></div>
                             <div>
                                 <strong>Telefone</strong>
-                                <p>+55 (11) 99999-9999</p> <!-- Substituir pelo telefone real se disponível -->
+                                <p>+55 (11) 99999-9999</p> 
                             </div>
                         </li>
                         <li>
-                            <div class="info-icon"><!-- Ícone Endereço --></div>
+                            <div class="info-icon"><img width="26" height="26" src="assets/images/endereço.png" alt="endereço"></div>
                             <div>
                                 <strong>Endereço</strong>
-                                <p>Av. Paulista, 1000 - São Paulo, SP</p> <!-- Substituir pelo endereço real se disponível -->
+                                <p>Av. Paulista, 1000 - São Paulo, SP</p> 
                             </div>
                         </li>
                     </ul>
-                    <div class="social-icons">
-                        <a href="#"><!-- Ícone Social 1 --></a>
-                        <a href="#"><!-- Ícone Social 2 --></a>
-                        <a href="#"><!-- Ícone Social 3 --></a>
-                    </div>
                 </div>
                 <div class="contact-form">
                     <form action="#">
@@ -144,35 +148,78 @@
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Serviços</a></li>
-                    <li><a href="#technology">Tecnologia</a></li>
                     <li><a href="#contact">Contato</a></li>
                 </ul>
             </div>
-            <div class="footer-legal">
+          <!--  <div class="footer-legal">
                 <h4>Legal</h4>
                 <ul>
                     <li><a href="#">Termos de Uso</a></li>
                     <li><a href="#">Política de Privacidade</a></li>
                     <li><a href="#">Cookies</a></li>
                 </ul>
-            </div>
+            </div>--> 
             <div class="footer-social">
                  <!-- Ícones sociais podem ser adicionados aqui -->
                  <div class="social-icons">
-                    <a href="#"><!-- Ícone Social 1 --></a>
-                    <a href="#"><!-- Ícone Social 2 --></a>
-                    <a href="#"><!-- Ícone Social 3 --></a>
+                    <a href="#"><img src="assets/images/instagram.png" alt="instagram"></a>
+                    </a>
+                    <a href="#"><img src="assets/images/X.png" alt="instagram"></a>
+                    </a>
+                    <a href="#"><img src="assets/images/email.png" alt="instagram"></a>
+                    </a>
+                
                 </div>
-                 <p class="developed-by">Desenvolvido com ❤️</p> <!-- Ajustar conforme o original -->
+                
             </div>
         </div>
-        <!-- O container #particles-js global cobre o fundo, não precisa de um específico para o footer -->
     </footer>
 
     <!-- particles.js lib (CDN) -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <!-- Main script -->
     <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+      const { createClient } = supabase;
+    
+      const supabaseClient = createClient('https://ojblhyflwcsckteiypje.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qYmxoeWZsd2NzY2t0ZWl5cGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0NTg4NjEsImV4cCI6MjA2MTAzNDg2MX0.-WSO_IgaXW81u8aqtJbRiLky40rFGpgAsRwArAcIU4M');
+    
+      const form = document.querySelector(".contact-form form");
+    
+      if (form) {
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+    
+          const name = form.name.value;
+          const email = form.email.value;
+          const message = form.message.value;
+    
+          const { data, error } = await supabaseClient
+            .from('contatos')
+            .insert([{ name, email, message }]);
+    
+            if (error) {
+  showToast("Erro ao enviar: " + error.message, "error");
+} else {
+  showToast("Mensagem enviada com sucesso! Em breve entraremos em contato com você", "success");
+  form.reset();
+}
+        });
+      }
+    </script>
+   <div id="toast-container"></div>
+
+   <div id="modal-tecnologias" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Tecnologias Utilizadas</h2>
+      <p>Na MaIA Labs, utilizamos ferramentas modernas como Python, TensorFlow, OpenAI, Supabase, Django, e muito mais para construir soluções de IA personalizadas.</p>
+      <!-- Adicione mais detalhes aqui -->
+    </div>
+  </div>
+  
 </body>
+
 </html>
 
