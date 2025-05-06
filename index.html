@@ -116,22 +116,31 @@
                     </ul>
                 </div>
                 <div class="contact-form">
-                    <form action="#">
+                    <form action="#https://teste1-n8n.6w5xq4.easypanel.host/webhook-test/a05f3a68-0ca5-4aea-abf0-1603303195db" method="POST">
                         <div class="form-group">
                             <label for="name">Nome</label>
                             <input type="text" id="name" name="name" placeholder="Seu nome" required>
                         </div>
+                
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" placeholder="seu@email.com" required>
                         </div>
+                
+                        <div class="form-group">
+                            <label for="whatsapp">WhatsApp</label>
+                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="Ex: 62991234567" pattern="[0-9]{10,15}" required>
+                        </div>
+                
                         <div class="form-group">
                             <label for="message">Mensagem</label>
                             <textarea id="message" name="message" rows="5" placeholder="Como podemos ajudar?" required></textarea>
                         </div>
+                
                         <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
                     </form>
                 </div>
+                
             </div>
         </section>
     </main>
@@ -180,34 +189,60 @@
     <!-- Main script -->
     <script src="js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-      const { createClient } = supabase;
-    
-      const supabaseClient = createClient('https://ojblhyflwcsckteiypje.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qYmxoeWZsd2NzY2t0ZWl5cGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0NTg4NjEsImV4cCI6MjA2MTAzNDg2MX0.-WSO_IgaXW81u8aqtJbRiLky40rFGpgAsRwArAcIU4M');
-    
-      const form = document.querySelector(".contact-form form");
-    
-      if (form) {
-        form.addEventListener("submit", async (e) => {
-          e.preventDefault();
-    
-          const name = form.name.value;
-          const email = form.email.value;
-          const message = form.message.value;
-    
-          const { data, error } = await supabaseClient
-            .from('contatos')
-            .insert([{ name, email, message }]);
-    
-            if (error) {
-  showToast("Erro ao enviar: " + error.message, "error");
-} else {
-  showToast("Mensagem enviada com sucesso! Em breve entraremos em contato com você", "success");
-  form.reset();
-}
-        });
-      }
-    </script>
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+      
+        const supabaseClient = createClient(
+          'https://ojblhyflwcsckteiypje.supabase.co',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qYmxoeWZsd2NzY2t0ZWl5cGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0NTg4NjEsImV4cCI6MjA2MTAzNDg2MX0.-WSO_IgaXW81u8aqtJbRiLky40rFGpgAsRwArAcIU4M'
+        );
+      
+        const form = document.querySelector(".contact-form form");
+      
+        if (form) {
+          form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+      
+            const name = form.name.value.trim();
+            const email = form.email.value.trim();
+            const whatsapp = form.whatsapp?.value?.trim() || "";
+            const message = form.message.value.trim();
+      
+            // Salvar no Supabase
+            const { data, error } = await supabaseClient
+              .from('contatos')
+              .insert([{ name, email, whatsapp, message }]);
+      
+            // Enviar também para o Webhook do n8n
+            const webhookURL = 'https://teste1-n8n.6w5xq4.easypanel.host/webhook-test/a05f3a68-0ca5-4aea-abf0-1603303195db';
+            const webhookAuth = btoa('formbot:minha-chave-123'); // codifica em base64
+      
+            try {
+              const response = await fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Basic ' + webhookAuth
+                },
+                body: JSON.stringify({ name, email, whatsapp, message })
+              });
+      
+              if (error || !response.ok) {
+                showToast("Houve um erro ao processar o envio. Tente novamente mais tarde.", "error");
+                return;
+              }
+      
+              showToast("Mensagem enviada com sucesso! Em breve entraremos em contato com você", "success");
+              form.reset();
+      
+            } catch (err) {
+              console.error(err);
+              showToast("Erro de conexão ao enviar para o n8n.", "error");
+            }
+          });
+        }
+      </script>
+      
    <div id="toast-container"></div>
 
    <div id="modal-tecnologias" class="modal hidden">
