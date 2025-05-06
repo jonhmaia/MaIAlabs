@@ -207,11 +207,11 @@
             const email = form.email.value.trim();
             const whatsapp = form.whatsapp?.value?.trim() || "";
             const message = form.message.value.trim();
-      
+           
             // Salvar no Supabase
             const { data, error } = await supabaseClient
               .from('contatos')
-              .insert([{ name, email, whatsapp, message }]);
+              .insert([{ name, email, whatsapp, message, processado: false }]);
       
             if (error) {
               showToast("Erro ao enviar: " + error.message, "error");
