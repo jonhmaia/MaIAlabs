@@ -213,35 +213,16 @@
               .from('contatos')
               .insert([{ name, email, whatsapp, message }]);
       
-            // Enviar também para o Webhook do n8n
-            const webhookURL = 'https://teste1-n8n.6w5xq4.easypanel.host/webhook/a05f3a68-0ca5-4aea-abf0-1603303195db';
-            const webhookAuth = btoa('formbot:minha-chave-123'); // codifica em base64
-      
-            try {
-              const response = await fetch(webhookURL, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Basic ' + webhookAuth
-                },
-                body: JSON.stringify({ name, email, whatsapp, message })
-              });
-      
-              if (error || !response.ok) {
-                showToast("Houve um erro ao processar o envio. Tente novamente mais tarde.", "error");
-                return;
-              }
-      
+            if (error) {
+              showToast("Erro ao enviar: " + error.message, "error");
+            } else {
               showToast("Mensagem enviada com sucesso! Em breve entraremos em contato com você", "success");
               form.reset();
-      
-            } catch (err) {
-              console.error(err);
-              showToast("Erro de conexão ao enviar para o n8n.", "error");
             }
           });
         }
       </script>
+      
       
    <div id="toast-container"></div>
 
