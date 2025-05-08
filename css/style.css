@@ -273,8 +273,8 @@ section {
 
 .hero-clients {
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  align-items: left;
+  margin-top: 10px;
   color: var(--secondary-text-color);
   font-size: 0.9rem;
 }
